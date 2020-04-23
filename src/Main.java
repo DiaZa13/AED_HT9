@@ -8,10 +8,10 @@ public class Main {
 
 		FileReader fr = null;
 		BufferedReader br = null;
-		String line, key = null, value=null;
+		String line, traducir = "", key = null, value=null;
 		String[] words = null;
 		
-	
+//---------------------Read the dictionary	
 		try {
 			fr = new FileReader ("Spanish.txt");
 			br = new BufferedReader(fr);
@@ -27,7 +27,7 @@ public class Main {
 							value = words[i].replaceAll("[\\[\\]].*", "").replaceAll(",.*", "").trim();
 					}
 					
-					//add
+					//add the association
 				}
 			}
 		}catch(Exception e){
@@ -41,6 +41,24 @@ public class Main {
 				e.printStackTrace();
 			}
 
+		}
+//-------------------------Read the file to translate
+		try {
+			fr = new FileReader ("texto.txt");
+	        br = new BufferedReader(fr);
+
+	        while((line = br.readLine())!=null)
+	        	traducir += line.toLowerCase();
+		}catch(Exception e){
+		        e.printStackTrace();
+		}finally{
+			try{
+				if( null != fr ){
+					fr.close();
+				}
+		    }catch (Exception e){
+		            e.printStackTrace();
+		    }
 		}
 	
 	
