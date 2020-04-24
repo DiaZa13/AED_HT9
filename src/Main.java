@@ -8,8 +8,9 @@ public class Main {
 
 		FileReader fr = null;
 		BufferedReader br = null;
-		String line, traducir = "", key = null, value=null;
-		String[] words = null;
+		String line, traducir = "", key = "", value = "",translation = "";
+		String[] words = null, translate;
+		Hash_Map dictionary = new Hash_Map();
 		
 //---------------------Read the dictionary	
 		try {
@@ -28,6 +29,7 @@ public class Main {
 					}
 					
 					//add the association
+					dictionary.add(key, value);
 				}
 			}
 		}catch(Exception e){
@@ -60,6 +62,21 @@ public class Main {
 		            e.printStackTrace();
 		    }
 		}
+		
+		
+		System.out.println("El texto a traducir es: "+ traducir);
+		translate = traducir.split(" ");
+		for(int a = 0; a < translate.length; a++) {
+			if(dictionary.getValue(translate[a]) != null) {
+				
+				translation += " " + dictionary.getValue(translate[a]) + " ";
+			}else{
+			translation += " "+"*"+translate[a]+"*"+" ";
+			}
+		}
+		System.out.println("Traduccion:");
+		System.out.println(translation);
+		System.out.println("Recuerde que las palabras que no se encuentran dentro del diccionario se muestran con un asteristo");
 	
 	
 	}
