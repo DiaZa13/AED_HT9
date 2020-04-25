@@ -25,6 +25,6 @@ public interface iMap<K,V>
      * @pre k and v are non-null
      * @post inserts a mapping from k to v in the map
      */
-    public V put(K k, V v);
+    public void add(K k, V v);
 
 }
