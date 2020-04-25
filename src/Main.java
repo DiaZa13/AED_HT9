@@ -10,10 +10,8 @@ public class Main {
 		FileReader fr = null;
 		BufferedReader br = null;
 		Scanner read = new Scanner(System.in);
-		Factory<K,V> mapFactory = new Factory<K,V>();
-		String line, traducir = "",translation = "", menu;
-		K key= (K) "";
-		V value = (V) "";
+		Factory<String,String> mapFactory = new Factory<String,String>();
+		String line, traducir = "",translation = "", menu, key = "", value = "";
 		String[] words = null, translate;
 		boolean tmenu;		
 
@@ -49,7 +47,7 @@ public class Main {
 			tmenu = MenuInvalido(menu);
 		}
 		
-		iMap<K,V> dictionary = mapFactory.getMap(menu);
+		iMap<String,String> dictionary = mapFactory.getMap(menu);
 		
 //---------------------Read the dictionary	
 		try {
@@ -62,9 +60,9 @@ public class Main {
 					words = line.split("\t");
 					for (int i = 0; i < words.length; i++) {
 						if (i%2 == 0)
-							key = (K) words[i].trim();
+							key = words[i].trim();
 						else if (i%2 == 1)
-							value = (V) words[i].replaceAll("[\\[\\]].*", "").replaceAll(",.*", "").trim();
+							value = words[i].replaceAll("[\\[\\]].*", "").replaceAll(",.*", "").trim();
 					}
 					
 					//add the association
@@ -89,9 +87,9 @@ public class Main {
 		System.out.println("El texto a traducir es: "+ traducir);
 		translate = traducir.split(" ");
 		for(int a = 0; a < translate.length; a++) {
-			if(dictionary.getValue((K) translate[a]) != null) {
+			if(dictionary.getValue(translate[a]) != null) {
 				
-				translation += " " + dictionary.getValue((K) translate[a]) + " ";
+				translation += " " + dictionary.getValue(translate[a]) + " ";
 			}else{
 			translation += " "+"*"+translate[a]+"*"+" ";
 			}

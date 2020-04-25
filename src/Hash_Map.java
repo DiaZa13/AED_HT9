@@ -8,7 +8,7 @@
 
 import java.util.*;
 
-public class Hash_Map<K,V> implements iMap<K,V>{
+public class Hash_Map<K extends Comparable<K>,V> implements iMap<K,V>{
 	
 	protected Map<K,V> dictionary;
 	

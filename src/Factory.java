@@ -8,7 +8,7 @@
  * @version 25/04/2020
  *
  */
-class Factory<K,V> {
+class Factory<K extends Comparable<K>,V> {
 	
    public iMap<K,V> getMap(String entry) {
 
