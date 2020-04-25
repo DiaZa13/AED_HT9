@@ -8,14 +8,14 @@
  * Extraido de: https://github.com/Bibeknam/algorithmtutorprograms/blob/master/data-structures/red-black-trees/RedBlackTree.java
  */
 
-public class RedBlackTree{
+public class RedBlackTree<E extends Comparable<E>>{
 	private Node root;
 	private Node TNULL;
 
 	//Ordering the RBT in PreOrder
 	private void preOrderHelper(Node node){
 		if(node != TNULL){
-			System.out.print(node.data +" ");
+			System.out.print(node.data.toString() +" ");
 			preOrderHelper(node.left);
 			preOrderHelper(node.right);
 		}
@@ -26,7 +26,7 @@ public class RedBlackTree{
 	private void inOrderHelper(Node node){
 		if(node!= TNULL){
 			inOrderHelper(node.left);
-			System.out.print(node.data+" ");
+			System.out.print(node.data.toString()+" ");
 			inOrderHelper(node.right);
 		}
 	}
@@ -36,20 +36,20 @@ public class RedBlackTree{
 		if(node != TNULL){
 			postOrderHelper(node.left);
 			postOrderHelper(node.right);
-			System.out.print(node.data+" ");
+			System.out.print(node.data.toString()+" ");
 		}
 	}
 
 	//Searching in the tree
-	private Node searchTreeHelper(Node node, int key){
-		if(node == TNULL || key == node.data){
+	private Node searchTreeHelper(Node node, E info){
+		if(node == TNULL || info == node.data){
 			return node;
 		}
 
-		if(key < node.data){
-			return searchTreeHelper(node.left, key);
+		if(info.compareTo((E)node.data)<0){
+			return searchTreeHelper(node.left, info);
 		}
-		return searchTreeHelper(node.right, key);
+		return searchTreeHelper(node.right, info);
 	}
 
 	//Reordering after deleting
@@ -123,16 +123,16 @@ public class RedBlackTree{
 		v.parent = u.parent;
 	}
 
-	private void deleteNodeHelper(Node node, int key) {
+	private void deleteNodeHelper(Node node, E info) {
 		// find the node containing key
 		Node z = TNULL;
 		Node x, y;
 		while (node != TNULL){
-			if (node.data == key) {
+			if (info.compareTo((E)node.data) == 0)  {
 				z = node;
 			}
 
-			if (node.data <= key) {
+			if (info.compareTo((E)node.data)>=0) {  
 				node = node.right;
 			} else {
 				node = node.left;
@@ -272,8 +272,8 @@ public class RedBlackTree{
 
 	// search the tree for the key k
 	// and return the corresponding node
-	public Node searchTree(int k) {
-		return searchTreeHelper(this.root, k);
+	public Node searchTree(E info) {
+		return searchTreeHelper(this.root, info);
 	}
 
 	// find the node with the minimum key
@@ -369,11 +369,11 @@ public class RedBlackTree{
 
 	// insert the key to the tree in its appropriate position
 	// and fix the tree
-	public void insert(int key) {
+	public void insert(E data) {
 		// Ordinary Binary Search Insertion
 		Node node = new Node();
 		node.parent = null;
-		node.data = key;
+		node.data = data;
 		node.left = TNULL;
 		node.right = TNULL;
 		node.color = 1; // new node must be red
@@ -383,7 +383,7 @@ public class RedBlackTree{
 
 		while (x != TNULL) {
 			y = x;
-			if (node.data < x.data) {
+			if (node.data.compareTo(x.data) < 0) {
 				x = x.left;
 			} else {
 				x = x.right;
@@ -394,7 +394,7 @@ public class RedBlackTree{
 		node.parent = y;
 		if (y == null) {
 			root = node;
-		} else if (node.data < y.data) {
+		} else if (node.data.compareTo(y.data) <0) {
 			y.left = node;
 		} else {
 			y.right = node;
@@ -420,9 +420,8 @@ public class RedBlackTree{
 	}
 
 	// delete the node from the tree
-	public void deleteNode(int data) {
+	public void deleteNode(E data) {
 		deleteNodeHelper(this.root, data);
-	}
-
+	
 
 }

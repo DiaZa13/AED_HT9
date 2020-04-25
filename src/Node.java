@@ -8,8 +8,8 @@
  * Extraido de: https://github.com/Bibeknam/algorithmtutorprograms/blob/master/data-structures/red-black-trees/RedBlackTree.java
  */
 
-public class Node{
-	int data; //holds the key
+public class Node<E extends Comparable<E>>{
+	E data; //holds the info
 	Node parent; //pointer to the parent
 	Node left; //pointer to the left child
 	Node right; //pointer to the right child
