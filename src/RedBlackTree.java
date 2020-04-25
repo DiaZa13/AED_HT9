@@ -42,7 +42,7 @@ public class RedBlackTree<K extends Comparable<K>, V> implements iMap<K,V>{
 
 	//Searching in the tree
 	private Node searchTreeHelper(Node node, K key){
-		if(node == TNULL || key == node.key){
+		if(node == TNULL || key.compareTo((K)node.key)==0){
 			return node;
 		}
 

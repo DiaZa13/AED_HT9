@@ -47,9 +47,9 @@ public class Main {
 			tmenu = MenuInvalido(menu);
 		}
 		
-		//iMap<String,String> dictionary = mapFactory.getMap(menu);
+		iMap<String,String> dictionary = mapFactory.getMap(menu);
 		//RedBlackTree<String, String> dictionary = new RedBlackTree<String,String>();
-		Hash_Map<String,String> dictionary = new Hash_Map<String,String>();
+		//Hash_Map<String,String> dictionary = new Hash_Map<String,String>();
 		
 //---------------------Read the dictionary	
 		try {
