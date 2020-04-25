@@ -8,8 +8,8 @@
  * @param <K>
  * @param <V>
  */
-public interface iMap<K,V>
-{
+public interface iMap<K,V>{
+	
     /**
      * @post returns true iff this map does not contain any entries
      */
