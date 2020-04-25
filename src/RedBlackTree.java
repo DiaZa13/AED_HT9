@@ -8,14 +8,14 @@
  * Extraido de: https://github.com/Bibeknam/algorithmtutorprograms/blob/master/data-structures/red-black-trees/RedBlackTree.java
  */
 
-public class RedBlackTree<E extends Comparable<E>>{
+public class RedBlackTree<K extends Comparable<K>, V> implements iMap<K,V>{
 	private Node root;
 	private Node TNULL;
 
 	//Ordering the RBT in PreOrder
 	private void preOrderHelper(Node node){
 		if(node != TNULL){
-			System.out.print(node.data +" ");
+			System.out.print(node.key +", "+node.value+"; ");
 			preOrderHelper(node.left);
 			preOrderHelper(node.right);
 		}
@@ -26,7 +26,7 @@ public class RedBlackTree<E extends Comparable<E>>{
 	private void inOrderHelper(Node node){
 		if(node!= TNULL){
 			inOrderHelper(node.left);
-			System.out.print(node.data+" ");
+			System.out.print(node.key +", "+node.value+"; ");
 			inOrderHelper(node.right);
 		}
 	}
@@ -36,20 +36,20 @@ public class RedBlackTree<E extends Comparable<E>>{
 		if(node != TNULL){
 			postOrderHelper(node.left);
 			postOrderHelper(node.right);
-			System.out.print(node.data+" ");
+			System.out.print(node.key +", "+node.value+"; ");
 		}
 	}
 
 	//Searching in the tree
-	private Node searchTreeHelper(Node node, E info){
-		if(node == TNULL || info == node.data){
+	private Node searchTreeHelper(Node node, K key){
+		if(node == TNULL || key == node.key){
 			return node;
 		}
 
-		if(info.compareTo((E)node.data)<0){
-			return searchTreeHelper(node.left, info);
+		if(key.compareTo((K)node.key)<0){
+			return searchTreeHelper(node.left, key);
 		}
-		return searchTreeHelper(node.right, info);
+		return searchTreeHelper(node.right, key);
 	}
 
 	//Reordering after deleting
@@ -123,16 +123,16 @@ public class RedBlackTree<E extends Comparable<E>>{
 		v.parent = u.parent;
 	}
 
-	private void deleteNodeHelper(Node node, E info) {
+	private void deleteNodeHelper(Node node, K key) {
 		// find the node containing key
 		Node z = TNULL;
 		Node x, y;
 		while (node != TNULL){
-			if (info.compareTo((E)node.data) == 0)  {
+			if (key.compareTo((K)node.key) == 0)  {
 				z = node;
 			}
 
-			if (info.compareTo((E)node.data)>=0) {  
+			if (key.compareTo((K)node.key)>=0) {  
 				node = node.right;
 			} else {
 				node = node.left;
@@ -238,7 +238,7 @@ public class RedBlackTree<E extends Comparable<E>>{
 		   }
             
            String sColor = root.color == 1?"RED":"BLACK";
-		   System.out.println(root.data + "(" + sColor + ")");
+		   System.out.println(root.key + "(" + sColor + ")");
 		   printHelper(root.left, indent, false);
 		   printHelper(root.right, indent, true);
 		}
@@ -272,8 +272,8 @@ public class RedBlackTree<E extends Comparable<E>>{
 
 	// search the tree for the key k
 	// and return the corresponding node
-	public Node searchTree(E info) {
-		return searchTreeHelper(this.root, info);
+	public Node searchTree(K key) {
+		return searchTreeHelper(this.root, key);
 	}
 
 	// find the node with the minimum key
@@ -369,11 +369,12 @@ public class RedBlackTree<E extends Comparable<E>>{
 
 	// insert the key to the tree in its appropriate position
 	// and fix the tree
-	public void insert(E data) {
+	public void insert(K key, V value) {
 		// Ordinary Binary Search Insertion
 		Node node = new Node();
 		node.parent = null;
-		node.data = data;
+		node.key = key;
+		node.value = value;
 		node.left = TNULL;
 		node.right = TNULL;
 		node.color = 1; // new node must be red
@@ -383,7 +384,7 @@ public class RedBlackTree<E extends Comparable<E>>{
 
 		while (x != TNULL) {
 			y = x;
-			if (node.data.compareTo(x.data) < 0) {
+			if (node.key.compareTo(x.key) < 0) {
 				x = x.left;
 			} else {
 				x = x.right;
@@ -394,7 +395,7 @@ public class RedBlackTree<E extends Comparable<E>>{
 		node.parent = y;
 		if (y == null) {
 			root = node;
-		} else if (node.data.compareTo(y.data) <0) {
+		} else if (node.key.compareTo(y.key) <0) {
 			y.left = node;
 		} else {
 			y.right = node;
@@ -420,12 +421,24 @@ public class RedBlackTree<E extends Comparable<E>>{
 	}
 
 	// delete the node from the tree
-	public void deleteNode(E data) {
-		deleteNodeHelper(this.root, data);
+	public void deleteNode(K key) {
+		deleteNodeHelper(this.root, key);
 	}
 
 
-	public void add(String k, String v){
-		insert((E) new Association(k,v));
+	public void add(K k, V v){
+		insert(k,v);
+	}
+
+	public V getValue(K key){
+		return (V) searchTree(key).value;
+	}
+
+	public boolean isEmpty(){
+		if(root.key == null){
+			return true;
+		}else{
+			return false;
+		}
 	}
 }
