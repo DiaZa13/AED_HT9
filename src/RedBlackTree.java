@@ -15,7 +15,7 @@ public class RedBlackTree<E extends Comparable<E>>{
 	//Ordering the RBT in PreOrder
 	private void preOrderHelper(Node node){
 		if(node != TNULL){
-			System.out.print(node.data.toString() +" ");
+			System.out.print(node.data +" ");
 			preOrderHelper(node.left);
 			preOrderHelper(node.right);
 		}
@@ -26,7 +26,7 @@ public class RedBlackTree<E extends Comparable<E>>{
 	private void inOrderHelper(Node node){
 		if(node!= TNULL){
 			inOrderHelper(node.left);
-			System.out.print(node.data.toString()+" ");
+			System.out.print(node.data+" ");
 			inOrderHelper(node.right);
 		}
 	}
@@ -36,7 +36,7 @@ public class RedBlackTree<E extends Comparable<E>>{
 		if(node != TNULL){
 			postOrderHelper(node.left);
 			postOrderHelper(node.right);
-			System.out.print(node.data.toString()+" ");
+			System.out.print(node.data+" ");
 		}
 	}
 
@@ -422,6 +422,9 @@ public class RedBlackTree<E extends Comparable<E>>{
 	// delete the node from the tree
 	public void deleteNode(E data) {
 		deleteNodeHelper(this.root, data);
-	
+	}
 
+	public void add(String k, String v){
+		insert((E) new Association(k,v));
+	}
 }
