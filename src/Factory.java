@@ -13,11 +13,12 @@ class Factory<K,V> {
    public iMap<K,V> getMap(String entry) {
 
 	if (entry.equals("1")) {
-		//RBT implementation
+		return new RedBlackTrey<K,V>();
 	}
        
-	//else
+	else{
 		return new Hash_Map<K,V>(); //Hash_Map implementation
+	}
    }
 }
 
