@@ -9,7 +9,7 @@
  */
 
 public class Node<E extends Comparable<E>>{
-	E data; //holds the key
+	E data; //holds the info
 	Node parent; //pointer to the parent
 	Node left; //pointer to the left child
 	Node right; //pointer to the right child

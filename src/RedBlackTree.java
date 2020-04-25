@@ -46,7 +46,7 @@ public class RedBlackTree<E extends Comparable<E>>{
 			return node;
 		}
 
-		if(info.compareTo(node.data)<0){
+		if(info.compareTo((E)node.data)<0){
 			return searchTreeHelper(node.left, info);
 		}
 		return searchTreeHelper(node.right, info);
@@ -128,11 +128,11 @@ public class RedBlackTree<E extends Comparable<E>>{
 		Node z = TNULL;
 		Node x, y;
 		while (node != TNULL){
-			if (info.compareTo(node.data) == 0)  {
+			if (info.compareTo((E)node.data) == 0)  {
 				z = node;
 			}
 
-			if (info.compareTo(node.data)>=0) {  
+			if (info.compareTo((E)node.data)>=0) {  
 				node = node.right;
 			} else {
 				node = node.left;
@@ -422,7 +422,6 @@ public class RedBlackTree<E extends Comparable<E>>{
 	// delete the node from the tree
 	public void deleteNode(E data) {
 		deleteNodeHelper(this.root, data);
-	}
-
+	
 
 }
