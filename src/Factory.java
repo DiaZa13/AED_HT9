@@ -13,7 +13,7 @@ class Factory<K,V> {
    public iMap<K,V> getMap(String entry) {
 
 	if (entry.equals("1")) {
-		return new RedBlackTrey<K,V>();
+		return new RedBlackTree<K,V>();
 	}
        
 	else{
