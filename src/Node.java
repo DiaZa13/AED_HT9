@@ -15,4 +15,8 @@ public class Node<K extends Comparable<K>,V>{
 	Node left; //pointer to the left child
 	Node right; //pointer to the right child
 	int color; //1 if red, 0 if black
+	@Override
+	public String toString() {
+		return "Node [key=" + key + ", value=" + value + "]";
+	}
 }

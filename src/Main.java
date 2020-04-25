@@ -47,7 +47,9 @@ public class Main {
 			tmenu = MenuInvalido(menu);
 		}
 		
-		iMap<String,String> dictionary = mapFactory.getMap(menu);
+		//iMap<String,String> dictionary = mapFactory.getMap(menu);
+		//RedBlackTree<String, String> dictionary = new RedBlackTree<String,String>();
+		Hash_Map<String,String> dictionary = new Hash_Map<String,String>();
 		
 //---------------------Read the dictionary	
 		try {
@@ -94,6 +96,9 @@ public class Main {
 			translation += " "+"*"+translate[a]+"*"+" ";
 			}
 		}
+		System.out.println("Test: " + key + " " + value);
+		System.out.println("Test1: " + dictionary.getValue("a"));//Prueba de almacenamiento con Hash_Map	
+		//System.out.println("Test1: " + dictionary.searchTree("a"));//Prueba de almacenamiento con RBT
 		System.out.println("Traduccion:");
 		System.out.println(translation);
 		System.out.println("Recuerde que las palabras que no se encuentran dentro del diccionario se muestran con un asteristo");
