@@ -424,10 +424,8 @@ public class RedBlackTree<E extends Comparable<E>>{
 		deleteNodeHelper(this.root, data);
 	}
 
-<<<<<<< HEAD
+
 	public void add(String k, String v){
 		insert((E) new Association(k,v));
-=======
->>>>>>> 8681e7c93558a9a9d9a41ed2a3b5ece815bae6ca
 	}
 }
