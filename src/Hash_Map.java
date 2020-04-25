@@ -1,11 +1,14 @@
 /**
+ * Hash_Map.java
+ * Hash implementation
+ * 
  * @author Diana Zaray Corado Lopez #191025 & Martin Amado Giron #19020
  * @version 23/4/2020
  */
 
 import java.util.*;
 
-public class Hash_Map<K,V>{
+public class Hash_Map<K,V> implements iMap<K,V>{
 	
 	protected Map<K,V> dictionary;
 	
@@ -19,10 +22,11 @@ public class Hash_Map<K,V>{
 	 * @pre:
 	 * @post: adds new items to the map
 	 */
-	public void add(K key, V value) {
+
+	@Override
+	public void add(K k, V v) {
 		// TODO Auto-generated method stub
-		dictionary.put(key, value);
-		
+		dictionary.put(k, v);
 	}
 
 	/**
@@ -37,22 +41,6 @@ public class Hash_Map<K,V>{
 	}
 
 	/**
-	 * searchWord
-	 * @pre: the map is full
-	 * @post: returns the key if this is on the map
-	 * @return vKey: the key that the user gave
-	 */
-	public K searchWord(K key) {
-		K vkey = null;
-		// TODO Auto-generated method stub
-		   if (dictionary.containsKey(key)) {
-			   vkey = key;
-		   }
-
-		return vkey;
-	}
-
-	/**
 	 * Empty
 	 * @pre:
 	 * @post: returns if the map is empty
@@ -62,5 +50,7 @@ public class Hash_Map<K,V>{
 		// TODO Auto-generated method stub
 		return dictionary.isEmpty();
 	}
+
+
 
 }

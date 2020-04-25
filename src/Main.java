@@ -1,49 +1,22 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.util.Scanner;
 
 public class Main {
 
-	public static void main(String[] args) {
+	public static <K, V> void main(String[] args) {
 		// TODO Auto-generated method stub
 
 		FileReader fr = null;
 		BufferedReader br = null;
-		String line, traducir = "", key = "", value = "",translation = "";
+		Scanner read = new Scanner(System.in);
+		Factory<K,V> mapFactory = new Factory<K,V>();
+		String line, traducir = "",translation = "", menu;
+		K key= (K) "";
+		V value = (V) "";
 		String[] words = null, translate;
-		Hash_Map dictionary = new Hash_Map();
-		
-//---------------------Read the dictionary	
-		try {
-			fr = new FileReader ("Spanish.txt");
-			br = new BufferedReader(fr);
-			while((line = br.readLine())!=null) {
-				if(line.startsWith("#")) {
-					
-				}else {
-					words = line.split("\t");
-					for (int i = 0; i < words.length; i++) {
-						if (i%2 == 0)
-							key = words[i].trim();
-						else if (i%2 == 1)
-							value = words[i].replaceAll("[\\[\\]].*", "").replaceAll(",.*", "").trim();
-					}
-					
-					//add the association
-					dictionary.add(key, value);
-				}
-			}
-		}catch(Exception e){
-			e.printStackTrace();
-		}finally{
-			try{
-				if( null != fr ){
-					fr.close();
-				}
-			}catch (Exception e){
-				e.printStackTrace();
-			}
+		boolean tmenu;		
 
-		}
 //-------------------------Read the file to translate
 		try {
 			fr = new FileReader ("texto.txt");
@@ -63,13 +36,62 @@ public class Main {
 		    }
 		}
 		
+//---------------------Menu
+		System.out.println("------- HT9 RBT/Hash_Map---------");
+		System.out.println("1. Implementacion por medio de un RBT");
+		System.out.println("2. Implementacion por medio de un Hash_Map");
+		System.out.print("Ingrese el numero de la opcion que desee probar: ");
+		menu = read.nextLine();
+		tmenu = MenuInvalido(menu);
+		while (tmenu != false) {
+			System.out.print("Ingrese nuevamente el numero de la opcion que desee: ");	
+			menu = read.nextLine();
+			tmenu = MenuInvalido(menu);
+		}
 		
+		iMap<K,V> dictionary = mapFactory.getMap(menu);
+		
+//---------------------Read the dictionary	
+		try {
+			fr = new FileReader ("Spanish.txt");
+			br = new BufferedReader(fr);
+			while((line = br.readLine())!=null) {
+				if(line.startsWith("#")) {
+					
+				}else {
+					words = line.split("\t");
+					for (int i = 0; i < words.length; i++) {
+						if (i%2 == 0)
+							key = (K) words[i].trim();
+						else if (i%2 == 1)
+							value = (V) words[i].replaceAll("[\\[\\]].*", "").replaceAll(",.*", "").trim();
+					}
+					
+					//add the association
+					dictionary.add(key, value);
+				}
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			try{
+				if( null != fr ){
+					fr.close();
+				}
+			}catch (Exception e){
+				e.printStackTrace();
+			}
+
+		}
+		
+		
+//---------------------Show the translation
 		System.out.println("El texto a traducir es: "+ traducir);
 		translate = traducir.split(" ");
 		for(int a = 0; a < translate.length; a++) {
-			if(dictionary.getValue(translate[a]) != null) {
+			if(dictionary.getValue((K) translate[a]) != null) {
 				
-				translation += " " + dictionary.getValue(translate[a]) + " ";
+				translation += " " + dictionary.getValue((K) translate[a]) + " ";
 			}else{
 			translation += " "+"*"+translate[a]+"*"+" ";
 			}
@@ -81,8 +103,14 @@ public class Main {
 	
 	}
 	
-
+	 public static boolean MenuInvalido(String me) {
+		 boolean incorrecto = false;
+		 if (!me.equals("1") && !me.equals("2")) 
+			 incorrecto = true;
+		else 
+			incorrecto = false;
+		 
+		 return incorrecto;
+	 }
 	
-	
-
 }
