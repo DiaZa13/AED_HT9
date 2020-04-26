@@ -1,0 +1,1 @@
+La funcion run excluye los procesos de impresion y solo realiza los de agregar al RBT
